@@ -40,15 +40,14 @@ export const authMiddleware = (
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
     
     // 4. Salvar o ID e ROLE do usuário dentro da requisição
-    // Assim, as próximas etapas (Controllers) saberão quem está logado
     const { id, role } = decoded as TokenPayload;
     
-    // @ts-ignore (Ignorar erro de tipagem do Express por enquanto para ser prático)
+    // @ts-ignore 
     req.userId = id;
     // @ts-ignore
     req.userRole = role;
 
-    return next(); // Pode passar!
+    return next(); 
   } catch (error) {
     return res.status(401).json({ error: 'Token inválido' });
   }
