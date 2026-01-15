@@ -1,5 +1,6 @@
 // src/services/UserService.ts
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { UserRepository } from '../repositories/UserRepository';
 
 export class UserService {
@@ -29,5 +30,30 @@ export class UserService {
     // 4. Retornar usuário sem a senha (segurança)
     const { password, ...userWithoutPassword } = newUser.toJSON();
     return userWithoutPassword;
+  }
+
+    // Novo método de Login
+  async login(email: string, password: string) {
+    // 1. Buscar usuário
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) {
+      throw new Error('E-mail ou senha inválidos.');
+    }
+
+    // 2. Comparar senha (O que veio do front vs O hash do banco)
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error('E-mail ou senha inválidos.');
+    }
+
+    // 3. Gerar o Token JWT
+    // Colocamos o ID e o ROLE dentro do token para saber quem é o usuário depois
+    const token = jwt.sign(
+      { id: user.id, role: user.role }, 
+      process.env.JWT_SECRET as string, 
+      { expiresIn: '1d' } // Token expira em 1 dia
+    );
+
+    return { token };
   }
 }

@@ -21,4 +21,22 @@ export class UserController {
       return res.status(400).json({ error: error.message });
     }
   }
+  async login(req: Request, res: Response) {
+    const userService = new UserService();
+
+    try {
+      const { email, password } = req.body;
+
+      if (!email || !password) {
+        return res.status(400).json({ error: 'Email e senha são obrigatórios.' });
+      }
+
+      const result = await userService.login(email, password);
+      
+      return res.status(200).json(result);
+    } catch (error: any) {
+      // Retornar 401 (Unauthorized) é mais semântico para erro de login
+      return res.status(401).json({ error: error.message });
+    }
+  }
 }
