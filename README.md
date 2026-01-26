@@ -28,6 +28,7 @@ O sistema permite que clientes abram solicitações de suporte e acompanhem o st
 O projeto utiliza tecnologias modernas e amplamente adotadas no mercado:
 
 ### Backend (API RESTful)
+
 - **Runtime:** Node.js
 - **Linguagem:** TypeScript (Tipagem estática para maior segurança)
 - **Framework:** Express
@@ -37,6 +38,7 @@ O projeto utiliza tecnologias modernas e amplamente adotadas no mercado:
 - **Arquitetura:** MSC (Model-Service-Controller)
 
 ### Frontend (SPA)
+
 - **Framework:** React.js + Vite
 - **Estilização:** Tailwind CSS
 - **HTTP Client:** Axios (com Interceptors para gestão de Token)
@@ -72,6 +74,7 @@ O código foi estruturado seguindo princípios de **Clean Architecture** para ga
 Siga os passos abaixo para rodar a aplicação localmente.
 
 ### Pré-requisitos
+
 - Node.js (v16+)
 - MySQL
 
@@ -113,7 +116,7 @@ npm install
 npm run dev
 ```
 
-Acesse: http://localhost:5173
+Acesse: <http://localhost:5173>
 
 ---
 
@@ -123,8 +126,8 @@ Para testar as diferentes visões do sistema, utilize os usuários abaixo (ou cr
 
 | Perfil | E-mail | Senha Padrão | Permissões |
 |--------|--------|--------------|-----------|
-| Técnico | tecnico@demo.com | 123 | Gerenciar tickets, Alterar status |
-| Cliente | cliente@demo.com | 123 | Abrir chamados, Visualizar histórico |
+| Técnico | <tecnico@demo.com> | 123 | Gerenciar tickets, Alterar status |
+| Cliente | <cliente@demo.com> | 123 | Abrir chamados, Visualizar histórico |
 
 **Nota:** É necessário cadastrar esses usuários via rota `POST /users` na primeira execução.
 
